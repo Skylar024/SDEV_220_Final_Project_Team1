@@ -15,9 +15,7 @@ class Prompts:
     no_number: str = "You have not entered number(s) for one or more date segments."
     bad_month: str = "A month value cannot be more than 12."
     bad_day: str = "A day value cannot be more than 31."
-    bad_year: str = "The year value cannot be in the past."
-    old_month: str = "The month value cannot be in the past."
-    old_day: str = "The day value cannot be in the past."
+    bad_date: str = "The date cannot be in the past."
     ask: str = f"When is the client checking out? (i.e.: {PRESENT.month}-{PRESENT.day + 5}-{PRESENT.year})> "
 
 def date_format(prompt):
@@ -47,21 +45,11 @@ def date_format(prompt):
                 elif int(day) > 31:
                     return f"{Prompts.bad_day} {Prompts.retry}"
                 # Verifying the date wasn't entered in the past
-                elif int(year) < PRESENT.year:
-                    return f"{Prompts.bad_year} {Prompts.retry}"
-                elif int(month) < PRESENT.month:
-                    return f"{Prompts.old_month} {Prompts.retry}"
-                elif int(day) < PRESENT.day:
-                    return f"{Prompts.old_day} {Prompts.retry}"
+                elif int(year) <= PRESENT.year and int(month) <= PRESENT.month and int(day) < PRESENT.day:
+                    return f"{Prompts.bad_date} {Prompts.retry}"
                 else:
                     # Populating the list holding individual values:
                     schedule.append(year)
                     schedule.append(month)
                     schedule.append(day)
         return schedule
-
-
-
-
-# if __name__=="__main__":
-#     user_prompt = date_format(input("Please enter the date of service requested: "))

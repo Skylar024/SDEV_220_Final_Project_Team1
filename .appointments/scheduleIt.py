@@ -7,14 +7,19 @@ team project assignment.
 """
 # pseudo code:
 # import needed modules
+# create class that stores prompts
 # create class that stores the dates
 
 # Importing needed module(s):
 from dataclasses import dataclass
 from datetime import datetime as dd
+import calendar as ca
 
 
-# Creating dataclass:
+
+
+
+
 @dataclass
 class ScheduleIt:
     """Stores the schedule for the business"""
@@ -32,7 +37,7 @@ class ScheduleIt:
 
     def __repr__(self):
         return f"{self.business_name}, {self.set_date} current date\
-and time: {dd.now()}"
+and time: {ca.da}"
 
 
 if __name__ == "__main__":
