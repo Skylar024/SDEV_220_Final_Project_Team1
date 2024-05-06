@@ -1,12 +1,28 @@
-# from sources import prompts
+"""
+Program: testing_modules.py
+Author: Tom Simic
+Last date modified: 2024-05-06
+Used for testing needs.
+"""
+# pseudo code:
+# connect to iShop.db
+# import sqlite3
 
-# user_input = "entry"
-# while isinstance(user_input, str):
-#     user_input = prompts.date_format(input("Enter valid date:> "))
-#     if isinstance(user_input, str):
-#         print('\n')
-#     print(user_input)
-import datetime
+# conn = sqlite3.connect('iShop.db')
+# curs = conn.cursor()
+# curs.execute("SELECT *, oid FROM ScheduleDB")
+# records = curs.fetchall()
+# print(records)
+# conn.close()
+# The above worked and returned list of tuples
+# Test importing appointments module:
+# import appointment as A
 
-appt = input("date")
-print(datetime.datetime.strptime(appt, '%m-%d-%Y'))
+# schedueld_date = A.ScheduleIt(3, "We In the Woods","Tom")
+# print(schedueld_date)
+# Above worked but I'm little confused so I emailed the professor
+
+# connect to DBManager module and test db connection
+import DBManager as dbm
+
+dbm.DataBaseClass.print_database()

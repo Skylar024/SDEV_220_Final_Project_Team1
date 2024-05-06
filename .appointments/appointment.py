@@ -28,10 +28,14 @@ class ScheduleIt:
 
 
 if __name__ == "__main__":
-    business_id = input("Enter Business ID: ")  # check note below
-    business_name = input("Enter Business name: ")  # check note below
-    business_id = input("Enter Customer's full name: ")  # check note below
-    app_date = ScheduleIt(business_id, business_name, business_id)
-    app_date_output = app_date.__dict__
-    # we'll change it to return add_date_output to get the dictionary back
-    print(app_date_output)
+    # business_id = input("Enter Business ID: ")  # check note below
+    # business_name = input("Enter Business name: ")  # check note below
+    # business_id = input("Enter Customer's full name: ")  # check note below
+    # app_date = ScheduleIt(business_id, business_name, business_id)
+    # app_date_output = app_date.__dict__
+    # # we'll change it to return add_date_output to get the dictionary back
+    # print(app_date_output)
+    import sys
+    arg1, arg2, arg3 = sys.argv[1:]
+    ScheduleIt(arg1, arg2, arg3)
+    
