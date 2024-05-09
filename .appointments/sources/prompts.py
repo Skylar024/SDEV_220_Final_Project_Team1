@@ -1,3 +1,12 @@
+"""
+Program: prompts.py
+Author: Tomi Simic
+Last date modified: 2024-02-20
+This program is to be used as a module for the final project application for
+team project assignment. It returns a prompt if the entry for the name or date
+is incorrect.
+"""
+# Import needed module(s)
 from datetime import datetime as dt
 from dataclasses import dataclass
 
@@ -9,7 +18,7 @@ PRESENT = dt.now()
 
 @dataclass
 class Prompts:
-    """Prompt jumpbox"""
+    """Prompt jumpbox holding all the prompts used for the application."""
     empty: str = "The entry was empty."
     divider: str = "You didn't use a dash to separate month, day, and year."
     retry: str = "Please try again and enter correct date format."
@@ -19,6 +28,8 @@ class Prompts:
     bad_day: str = "A day value cannot be more than 31."
     bad_date: str = "The date cannot be in the past."
     bad_day_count: str = "Selected month doesn't have that many days."
+    user_name: str = "Please enter your name (i.e.:John Smith-Jones) >"
+    bad_name: str = "The name entry is invalid. It must be between 3 - 50 letters long & contain no numbers or special characters aside from dash."
     ask: str = f"When would you like to schedule the appointment? (i.e.: ({PRESENT.month}\
 -{PRESENT.day + 5}-{PRESENT.year}) > "
 
@@ -52,6 +63,7 @@ def date_format(prompt):
             # Verifying the date wasn't entered in the past
             elif int(year) < PRESENT.year or int(month) < PRESENT.month or int(day) < PRESENT.day:
                 return f"{Prompts.bad_date} {Prompts.retry}"
+            # Verifying the day count for the specified month
             try:
                 dt.strptime(f"{year}-{month}-{day}", '%Y-%m-%d')
             except ValueError:
@@ -61,7 +73,23 @@ def date_format(prompt):
                 schedule.append(year)
                 schedule.append(month)
                 schedule.append(day)
+        # Returning the date as a list holding each ISO date segment value
         return schedule
+    
+
+def name_format(entry):
+    """Verifying user's name holds correct count of characters and no numbers
+    or special characters, except dash."""
+    import re
+    verification = re.compile("^[a-zA-Z- ]{3,50}$")
+    user_name = bool(verification.match(entry))
+    if user_name is False:
+        # Returning Boolean False if name is invalid:
+        return user_name
+    else:
+        # Returning user's name if it's correct:
+        return entry
+        
 
 
 if __name__ == "__main__":

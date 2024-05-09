@@ -16,13 +16,17 @@ Used for testing needs.
 # conn.close()
 # The above worked and returned list of tuples
 # Test importing appointments module:
-# import appointment as A
+import appointment as A
 
-# schedueld_date = A.ScheduleIt(3, "We In the Woods","Tom")
-# print(schedueld_date)
+schedueld_date = A.SetAppointment(8, "My Business")
+print(schedueld_date)
 # Above worked but I'm little confused so I emailed the professor
 
 # connect to DBManager module and test db connection
-import DBManager as dbm
+# import DBManager as dbm
 
-dbm.DataBaseClass.print_database()
+# dbm.DataBaseClass.print_database()
+# from sources import scheduleIt
+
+# user_name = scheduleIt.acceptName()
+# print(user_name)
