@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox
+import sqlite3
 
 class SchedulingApp:
     def __init__(self, root):
@@ -29,8 +30,12 @@ class SchedulingApp:
         if service_id not in self.services:
             messagebox.showerror("Error", "Invalid service number.")
             return
-        service = self.services[service_id]
+        self.service_id = service_id  # Save service ID for DB
+        self.send_to_database(self.service_id)  # Send service ID to DB
 
+        self.select_business()  # Continue to select business
+
+    def select_business(self):
         self.businesses = {
             1: "iShop",
             2: "PC-Com",
@@ -38,15 +43,13 @@ class SchedulingApp:
         }
         
         business_msg = "\n".join([f"{k}: {v}" for k, v in self.businesses.items()])
-        business_id = simpledialog.askinteger("Select a Business", f"Please enter the number corresponding to the business you want for {service[0]}:\n{business_msg}")
+        business_id = simpledialog.askinteger("Select a Business", f"Please enter the number corresponding to the business you want:\n{business_msg}")
         if business_id not in self.businesses:
             messagebox.showerror("Error", "Invalid business number.")
             return
         business = self.businesses[business_id]
 
-        self.selected_service = service[0]
         self.selected_business = business
-
         self.enter_customer_details()
 
     def enter_customer_details(self):
@@ -65,8 +68,30 @@ class SchedulingApp:
         tk.Button(self.details_window, text="Submit", command=self.schedule_appointment).pack(pady=20)
 
     def schedule_appointment(self):
-        messagebox.showinfo("Appointment Scheduled", f"Appointment for {self.selected_service} at {self.selected_business} is scheduled for {self.date_var.get()} under the name {self.name_var.get()}.")
+        messagebox.showinfo("Appointment Scheduled", f"Appointment at {self.selected_business} is scheduled for {self.date_var.get()} under the name {self.name_var.get()}.")
         self.root.destroy()
+
+    def send_to_database(self, service_id):
+        # Connect to SQLite DB
+        conn = sqlite3.connect('Final_Project_DB.sqlite')
+        cursor = conn.cursor()
+        
+        # Create table 
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS ServiceRequests (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                service_id INTEGER NOT NULL
+            )
+        ''')
+        
+        # Insert the service ID into DB Table
+        cursor.execute('INSERT INTO ServiceRequests (service_id) VALUES (?)', (service_id,))
+        
+        # Commit and Close DB
+        conn.commit()
+        conn.close()
+
+        print(f"Service ID {service_id} sent to database.")
 
 if __name__ == "__main__":
     root = tk.Tk()
