@@ -2,12 +2,12 @@ SDEV_220 Final Project - Team 1
 
 Instructions:
 1. Run the GUI.py file to launch the application. 
-2. Then Choose a Serivce, the app will provide you with a list of all businesses
+2. Then Choose a Service, the app will provide you with a list of all businesses
         that provide that service
 3. Then choose a business to use for that service
 4. Then Enter your name and what date you would like the appointment to be on
 5. A confirmation message will let you know the final detail of your appointment
-6. If any User input is entered inccorectly, an error message will let the user know
+6. If any User input is entered incorrectly, an error message will let the user know
         what was entered wrong and how it should be corrected.
 
 Team Members:
