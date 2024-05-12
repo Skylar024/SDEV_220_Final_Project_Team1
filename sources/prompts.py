@@ -75,7 +75,7 @@ def date_format(prompt):
                 schedule.append(day)
         # Returning the date as a list holding each ISO date segment value
         return schedule
-    
+
 
 def name_format(entry):
     """Verifying user's name holds correct count of characters and no numbers
@@ -89,7 +89,6 @@ def name_format(entry):
     else:
         # Returning user's name if it's correct:
         return entry
-        
 
 
 if __name__ == "__main__":

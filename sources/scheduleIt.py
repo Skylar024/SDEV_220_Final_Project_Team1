@@ -7,35 +7,37 @@ team project assignment. It loops the user until correct input is entered for
 the user name and the date.
 """
 # Import module(s):
+from tkinter import messagebox
 from sources import prompts
 
 # create class that verifies the dates
+
+
 class ScheduleIt:
 
-    def acceptAppointment():
+    def acceptAppointment(entry):
         """Verifies the date entered by the user."""
-        user_input = prompts.date_format(input(prompts.Prompts.ask))
+        user_input = prompts.date_format(entry)
         # Evaluating if return is a string:
-        while isinstance(user_input, str):
-                print('\n')
-                print(user_input)
-                print('\n')
-                user_input = prompts.date_format(input(prompts.Prompts.ask))
-        # Returning date in ISO format if the value is a list:
-        return f"{user_input[0]}-{user_input[1]}-{user_input[2]}"
+        if isinstance(user_input, str):
+            messagebox.showerror("Invalid date entry", user_input)
+            return False
+        else:
+            # Returning date in ISO format if the value is a list:
+            return f"{user_input[0]}-{user_input[1]}-{user_input[2]}"
 
-
-    def acceptName():
+    def acceptName(entry):
         """Verifies user name entered."""
-        user_input = prompts.name_format(input(prompts.Prompts.user_name))
+        user_input = prompts.name_format(entry)
         # Evaluationg if the return is a Boolean value:
-        while isinstance(user_input, bool):
-            print('\n')
-            print(prompts.Prompts.bad_name)
-            print('\n')
-            user_input = prompts.name_format(input(prompts.Prompts.user_name))
-        # Returning user's name if it's not a Boolean value
-        return user_input
+        if isinstance(user_input, bool):
+            messagebox.showerror("Invalid Name entery",
+                                 prompts.Prompts.bad_name)
+            return False
+
+        else:
+            # Returning user's name if it's not a Boolean value
+            return user_input
 
 
 if __name__ == "__main__":
