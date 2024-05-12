@@ -24,16 +24,16 @@ class SchedulingApp:
         self.root = root
         self.root.title("Appointment Scheduling System")
         self.root.geometry("600x350+200+80")
-        self.root.attributes("-alpha", 0.95)
+        # self.root.attributes("-alpha", 0.95)
+        self.root.configure(background='#963505')
         # self.root.attributes("-fullscreen", 1)
         # enable the close icon
         self.root.protocol("WM_DELETE_WINDOW", self.root.quit)
 
-        tk.Label(self.root, text="Welcome to the Appointment Reservation System\
-                 .\nPlease review the List of Services and press the button to proceed.",
+        tk.Label(self.root, text="Welcome to the Appointment Reservation System.\nPlease review the List of Services and press the button to proceed.", foreground="#d36d13", background='#963505',
                  font=('Arial', 14), justify=tk.CENTER).pack(pady=(10, 20))
 
-        tk.Label(self.root, text="List of Services",
+        tk.Label(self.root, text="List of Services", background='#458466', foreground="#963505",
                  font=('Arial', 16)).pack(pady=(10, 0))
         # Connecting to database and pulling service information:
         self.services = {}
@@ -45,11 +45,11 @@ class SchedulingApp:
         services_text = "\n".join(
             [f"{k}: {v}" for k, v in self.services.items()])
         self.services_label = tk.Label(
-            self.root, text=services_text, justify=tk.LEFT)
+            self.root, text=services_text, justify=tk.LEFT, background='#963505', foreground="#458466",)
         self.services_label.pack(pady=20)
 
         # Appointment reservation button
-        tk.Button(self.root, text="Start Appointment Reservation",
+        tk.Button(self.root, text="Start Appointment Reservation", background='#458466',
                   command=self.start_reservation_process).pack(pady=20)
 
     def start_reservation_process(self):
